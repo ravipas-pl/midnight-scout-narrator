@@ -1,0 +1,41 @@
+{
+  "status": "Scripts prepared only. No synthesized audio generated yet.",
+  "direction": "Warm, natural adult camp narrator for a Thai scout mystery-comedy game. Friendly, gently playful, clear and reassuring. Conversational rhythm with light suspense. Crisp public hour numbers and eye-opening/closing commands. No robotic cadence, exaggerated announcer delivery, shouting, background music, sound effects or voice imitation. Keep one consistent speaker across all clips.",
+  "thai_direction": "พูดภาษาไทยอย่างเป็นธรรมชาติ เหมือนผู้ดำเนินเกมในค่ายลูกเสือ น้ำเสียงอบอุ่น เป็นกันเอง แฝงความขี้เล่นและลึกลับเล็กน้อย พูดเลขและคำสั่งลืมตา/หลับตาให้ชัด ไม่กระซิบ ไม่ดัดเสียง ไม่มีดนตรีหรือเอฟเฟกต์",
+  "output": "Individual clean MP3 clips; consistent loudness; trim excessive leading/trailing silence. Preview and verify Thai pronunciation before full batch.",
+  "clips": {
+    "th": {
+      "prepare": "จำแต้มลูกเต๋าของตัวเอง แล้วครอบถ้วยให้เรียบร้อยนะ… ทุกคน หลับตา",
+      "close": "หมดเวลาแล้ว… ทุกคน หลับตา",
+      "morning": "เช้าแล้ว! ทุกคน ลืมตา… เมื่อคืนมีคนใช้ห้องน้ำ แล้วไม่กดน้ำ! เตรียมคำให้การไว้ เริ่มสอบสวนเมื่อทุกคนพร้อม",
+      "discussion": "เริ่มสอบสวนได้แล้ว! ยังไม่เปิดไพ่ หรือโชว์แต้มลูกเต๋านะ",
+      "vote": "หมดเวลาสอบสวน! เตรียมลงคะแนน… สาม… สอง… หนึ่ง… ชี้!",
+      "pause-night": "พักเกมชั่วคราว ทุกคนหลับตาไว้ก่อนนะ",
+      "pause-discussion": "พักเวลาสอบสวนชั่วคราว",
+      "test": "พร้อมเข้าค่ายแล้ว! คืนนี้… ทุกคนอาจเป็นผู้ต้องสงสัย",
+      "awake-1": "เวลาที่หนึ่ง… คนที่ได้แต้มหนึ่ง ลืมตา",
+      "awake-2": "เวลาที่สอง… คนที่ได้แต้มสอง ลืมตา",
+      "awake-3": "เวลาที่สาม… คนที่ได้แต้มสาม ลืมตา",
+      "awake-4": "เวลาที่สี่… คนที่ได้แต้มสี่ ลืมตา",
+      "awake-5": "เวลาที่ห้า… คนที่ได้แต้มห้า ลืมตา",
+      "awake-6": "เวลาที่หก… คนที่ได้แต้มหก ลืมตา"
+    },
+    "en": {
+      "prepare": "Remember your die, and cover your cup. Everyone… close your eyes.",
+      "close": "Time is up. Everyone… close your eyes.",
+      "morning": "Morning! Everyone, open your eyes. Someone forgot to flush last night! Get your alibis ready. Start discussion when everyone is ready.",
+      "discussion": "Time to investigate! Keep your roles and dice hidden.",
+      "vote": "Discussion is over. Get ready to vote. Three… two… one… point!",
+      "pause-night": "The game is paused. Everyone, keep your eyes closed.",
+      "pause-discussion": "The discussion timer is paused.",
+      "test": "The camp is ready! Tonight… everyone is a suspect.",
+      "awake-1": "Hour 1. If you rolled 1… open your eyes.",
+      "awake-2": "Hour 2. If you rolled 2… open your eyes.",
+      "awake-3": "Hour 3. If you rolled 3… open your eyes.",
+      "awake-4": "Hour 4. If you rolled 4… open your eyes.",
+      "awake-5": "Hour 5. If you rolled 5… open your eyes.",
+      "awake-6": "Hour 6. If you rolled 6… open your eyes."
+    }
+  },
+  "integration_plan": "Embed generated clips as audio data in the single-file build. Await playback completion before starting each phase timer. Keep device TTS as a fallback. No API key in the frontend."
+}

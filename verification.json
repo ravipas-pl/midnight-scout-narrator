@@ -1,0 +1,52 @@
+{
+  "unit_tests": 29,
+  "unit_tests_passed": 29,
+  "browser_checks": [
+    "390px mobile: no horizontal overflow; 55px primary controls",
+    "1280px desktop: no horizontal overflow",
+    "Thai on-device voice test completed",
+    "Complete six-hour shortened night, then morning",
+    "Discussion to voting completion",
+    "Settings language and duration persistence",
+    "Pause, stop and standalone-bundle controls",
+    "Non-verbal default visible; speech checkbox off; sounds checkbox on",
+    "Preview: high chimes, accelerating final-three-second ticking, low closing chimes completed",
+    "Updated start/pause/resume/stop sequence",
+    "390px release layout: no horizontal overflow; header at top",
+    "Full preview including synthesized flush completed successfully",
+    "Preview containing fart, water plop and flush completed successfully"
+  ],
+  "bundle_external_scripts": 0,
+  "bundle_external_styles": 0,
+  "limitations": [
+    "Direct file:// navigation blocked by preview browser; bundled release checked via localhost",
+    "Physical Android and iOS devices not tested",
+    "Offline speech requires an installed on-device voice"
+  ],
+  "version": "1.2.0",
+  "default_mode": "non-verbal: speech off, chimes on",
+  "countdown_audio": {
+    "normal": "1 tick/sec",
+    "last_3_seconds": [
+      2,
+      4,
+      6
+    ],
+    "scheduler": "Web Audio clock",
+    "discussion": "last 3 seconds only",
+    "cancellation": "pause, stop, phase changes and backgrounding"
+  },
+  "settings_migration": "v1 to v2: preserve timing/language/volume; apply speech off and sounds on once; later explicit voice opt-ins persist",
+  "flush_sound": "One of three possible random hourly effects; no extra fixed morning flush",
+  "hourly_comic_effects": {
+    "choices": [
+      "flush",
+      "fart",
+      "plop"
+    ],
+    "selection": "Independent equal-probability picks; repeats allowed",
+    "schedule": "One after each hour closing cue, before the closed-eye gap",
+    "pause_resume": "Preserves effect chosen for the hour",
+    "privacy": "No relationship to roles, players, dice or toilet state"
+  }
+}

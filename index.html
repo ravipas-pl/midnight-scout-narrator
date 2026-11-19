@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#14251b">
+  <meta name="description" content="An offline night narrator for The Midnight Scout. Six wake windows, synthesized camp chimes, and Thai or English narration.">
+  <title>The Midnight Scout · Night Narrator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/settings.js"></script>
+  <script defer src="js/game-engine.js"></script>
+  <script defer src="js/audio-engine.js"></script>
+  <script defer src="js/speech-engine.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <svg class="icon-library" aria-hidden="true"><defs>
+    <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20.8 14A9 9 0 0 1 10 3.2 9 9 0 1 0 20.8 14Z"/></symbol>
+    <symbol id="icon-tent" viewBox="0 0 32 28"><path d="M3 24 16 4l13 20H3Zm13-20v20m0-13 7 13"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16M9 4v6m6 4v6"/></symbol>
+    <symbol id="icon-sound" viewBox="0 0 24 24"><path d="m4 9 4 0 5-4v14l-5-4H4V9Zm12-1a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></symbol>
+  </defs></svg>
+  <div class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="The Midnight Scout home"><span class="brand-patch"><svg><use href="#icon-tent"/></svg><span>✦</span></span><span><strong>THE MIDNIGHT SCOUT</strong><small>NIGHT NARRATOR / ผู้ดำเนินคดียามค่ำ</small></span></a>
+      <button class="icon-button" id="settings-button" aria-label="ตั้งค่า / Settings"><svg><use href="#icon-settings"/></svg></button>
+    </header>
+
+    <main>
+      <div class="chapter"><span class="chapter-line"></span><span data-i18n="chapter">คดีปริศนาส้วมกลางดึก</span><span class="chapter-line"></span></div>
+      <div class="main-layout">
+        <section class="night-panel" aria-label="Night narrator">
+          <div class="panel-top"><span class="small-label" data-i18n="nightWatch">NIGHT WATCH · CLASSIC</span><span class="status-pill" id="status-pill"><i></i><span id="status-text">พร้อมเข้าค่าย</span></span></div>
+          <div class="timer-scene">
+            <svg class="landscape" viewBox="0 0 600 430" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#20382a"/><stop offset="1" stop-color="#17291f"/></linearGradient></defs><path fill="url(#sky)" d="M0 0h600v430H0z"/><g fill="#c69a43" opacity=".55"><circle cx="80" cy="72" r="1.7"/><circle cx="470" cy="60" r="2"/><circle cx="535" cy="117" r="1.4"/><circle cx="140" cy="118" r="1.5"/><circle cx="406" cy="26" r="1.4"/></g><g fill="#102219"><path d="m33 212 30 50H43l28 40H51l27 43H-2l27-43H5l28-40H13Zm515-26 34 59h-22l30 44h-20l30 48H496l30-48h-20l30-44h-22Z"/><path d="M0 361q90-46 185-15t179-4 236 15v73H0Z"/></g><g fill="none" stroke="#49603e" stroke-width="2"><path d="m72 382 37-55 36 55H72Zm37-55v55l16-1Zm390-3v-43h24v43m-27-44 15-12 16 12Z"/></g><path d="M511 351a4 4 0 1 0 4 5 3.6 3.6 0 0 1-4-5" fill="#c69a43"/><path d="M0 405q150-21 300-2t300-4v31H0" fill="#0d1e16"/></svg>
+            <div class="timer-wrap" id="timer-wrap">
+              <svg class="timer-ring" viewBox="0 0 260 260" aria-hidden="true"><circle class="ring-track" cx="130" cy="130" r="116"/><circle class="ring-progress" id="ring-progress" cx="130" cy="130" r="116" pathLength="1"/></svg>
+              <div class="timer-center"><svg class="moon-icon"><use href="#icon-moon"/></svg><span class="timer-eyebrow" id="timer-eyebrow">รอเริ่มคดี</span><strong class="time" id="countdown" aria-hidden="true">06</strong><span class="timer-unit" id="timer-unit">ช่วงเวลาตื่น</span></div>
+            </div>
+          </div>
+          <div class="stage-copy"><h1 id="stage-title">คืนนี้…ใครยังไม่นอน?</h1><p id="stage-description">เตรียมลูกเต๋า ครอบถ้วย แล้วให้เราพาทั้งค่ายผ่านค่ำคืนนี้</p></div>
+          <ol class="hour-track" id="hour-track" aria-label="Public wake windows"><li data-hour="1"><span>1</span></li><li data-hour="2"><span>2</span></li><li data-hour="3"><span>3</span></li><li data-hour="4"><span>4</span></li><li data-hour="5"><span>5</span></li><li data-hour="6"><span>6</span></li></ol>
+          <div class="track-labels"><span data-i18n="lightsOut">หลับตา</span><span data-i18n="sunrise">เช้าแล้ว</span></div>
+        </section>
+
+        <aside class="camp-notes">
+          <div class="note-heading"><span class="small-label" data-i18n="fieldNotes">สมุดประจำค่าย</span><span class="edition">01 / CLASSIC</span></div>
+          <h2 data-i18n="beforeStart">ก่อนปิดไฟ</h2>
+          <ol class="checklist"><li><span>01</span><div><strong data-i18n="checkRoles">แจกบทบาทลับแล้ว</strong><p data-i18n="checkRolesBody">ผู้ก่อเหตุ 1 คน ที่เหลือผู้บริสุทธิ์</p></div></li><li><span>02</span><div><strong data-i18n="checkDice">จำแต้ม แล้วครอบถ้วย</strong><p data-i18n="checkDiceBody">แต้มของแต่ละคนคือเวลาที่ต้องตื่น</p></div></li><li><span>03</span><div><strong data-i18n="checkToilet">หงายส้วมด้านสะอาด</strong><p data-i18n="checkToiletBody">วางกลางวง ให้ทุกคนเอื้อมถึง</p></div></li></ol>
+          <div class="round-summary"><div><span data-i18n="wakeWindow">ช่วงตื่น</span><strong id="wake-summary">12 วินาที</strong></div><div><span data-i18n="eyesClosed">ช่วงหลับตา</span><strong id="gap-summary">3 วินาที</strong></div></div>
+          <div class="voice-status" id="voice-status"><svg><use href="#icon-sound"/></svg><div><strong id="voice-label">โหมดสัญญาณเสียง · ไม่พูด</strong><p id="voice-detail"></p></div></div>
+          <button class="text-button" id="test-button"><span class="sound-wave">♪</span><span data-i18n="testAudio">ลองเสียงประจำค่ายทั้งหมด</span><span>↗</span></button>
+          <div class="privacy-note"><svg><use href="#icon-lock"/></svg><p data-i18n="privacy">ไม่มีการกรอกหรือเก็บแต้มลับของผู้เล่น หน้าจอแสดงเฉพาะเวลาที่กำลังเรียก</p></div>
+        </aside>
+      </div>
+
+      <section class="control-deck" aria-label="Narrator controls"><div class="control-caption"><span class="live-dot"></span><span id="control-caption">6 ช่วงเวลา · ทุกคนเล่นได้ ไม่ต้องมีคนอ่านบท</span></div><div class="control-buttons"><button class="primary-button" id="main-button"><span class="button-icon" id="main-icon">▶</span><span id="main-label">เริ่มกลางคืน</span></button><button class="stop-button" id="stop-button" disabled><span>■</span><span data-i18n="stop">จบรอบ</span></button></div><p class="control-hint" id="control-hint" data-i18n="foregroundHint">วางโทรศัพท์ไว้กลางวง และเปิดหน้านี้ค้างไว้</p></section>
+    </main>
+    <footer class="site-footer"><span>THAI SCOUT CAMP · MYSTERY COMEDY</span><span data-i18n="footer">ไม่ว่าใครก็เป็นผู้ต้องสงสัย…</span></footer>
+  </div>
+
+  <dialog id="settings-dialog" aria-labelledby="settings-heading"><form id="settings-form"><div class="dialog-header"><div><span class="small-label">CAMP CONTROL</span><h2 id="settings-heading" data-i18n="settings">ตั้งค่าคืนนี้</h2></div><button type="button" class="icon-button close-button" id="close-settings" aria-label="Close settings">×</button></div>
+    <div class="settings-grid">
+      <label><span id="language-label" data-i18n="language">ภาษา</span><select name="language" id="language" aria-labelledby="language-label"><option value="th">ไทย</option><option value="en">English</option></select></label>
+      <label><span id="voice-select-label" data-i18n="voice">เสียงบรรยาย</span><select name="voiceURI" id="voice-select" aria-labelledby="voice-select-label"><option value="">System default</option></select><small data-i18n="offlineVoice">เลือกเสียงที่ติดตั้งบนเครื่องเพื่อใช้งานออฟไลน์ เสียงบางตัวอาจต้องต่ออินเทอร์เน็ต</small></label>
+      <label class="range-label"><span><span data-i18n="volume">ระดับเสียง</span><output id="volume-value">65%</output></span><input type="range" name="volume" min="0" max="100" step="1" value="65"></label>
+      <label class="range-label"><span><span data-i18n="speed">ความเร็วเสียงพูด</span><output id="rate-value">1.00×</output></span><input type="range" name="rate" min="0.75" max="1.25" step="0.05" value="1"></label>
+      <div class="setting-pair"><label><span data-i18n="wakeSeconds">ตื่น / วินาที</span><input name="wakeSeconds" type="number" min="5" max="30" value="12" inputmode="numeric" required></label><label><span data-i18n="gapSeconds">หลับตา / วินาที</span><input name="gapSeconds" type="number" min="2" max="10" value="3" inputmode="numeric" required></label></div>
+      <div class="setting-pair"><label><span data-i18n="prepareSeconds">เตรียมตัว / วินาที</span><input name="prepareSeconds" type="number" min="3" max="15" value="5" inputmode="numeric" required></label><label><span data-i18n="discussionSeconds">สอบสวน / วินาที</span><input name="discussionSeconds" type="number" min="30" max="600" value="180" inputmode="numeric" required></label></div>
+      <label><span data-i18n="theme">เสียงประจำค่าย</span><select name="theme"><option value="camp" data-i18n="campSound">Camp bells · ระฆังค่าย</option><option value="soft" data-i18n="softSound">Soft moon · เสียงนุ่ม</option></select></label>
+      <div class="toggle-row"><label><input name="speech" type="checkbox"><span data-i18n="speechOn">เสียงพูด</span></label><label><input name="sounds" type="checkbox" checked><span data-i18n="soundsOn">ดนตรีและสัญญาณ</span></label></div>
+    </div><p class="settings-note" data-i18n="settingsNote">ค่าเริ่มต้นเป็นโหมดไม่พูด ตื่น 12 / หลับตา 3 วินาที นับเวลาหลังสัญญาณจบ เสียงติ๊กจะเร่งใน 3 วินาทีสุดท้าย</p><button class="primary-button" type="submit" data-i18n="save">บันทึกการตั้งค่า</button></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
+  <noscript><p class="noscript">Please enable JavaScript to use the night narrator.</p></noscript>
+</body>
+</html>

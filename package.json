@@ -1,0 +1,9 @@
+{
+  "name": "midnight-scout-narrator",
+  "private": true,
+  "version": "1.2.0",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.cjs"
+  }
+}
