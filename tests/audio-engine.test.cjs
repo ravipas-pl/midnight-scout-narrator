@@ -85,3 +85,28 @@ test('all random comic effects respect muted audio',async()=>{
   for(const effect of ['flush','fart','plop'])await e.play(effect);
   assert.equal(nodes.length,0);assert.equal(e.pending.size,0);
 });
+test('recorded samples play at the settings volume, report failure, and cancel on stop',async()=>{
+  const created=[];
+  globalThis.Audio=class{constructor(src){this.src=src;this.paused=true;created.push(this);}play(){this.paused=false;return this.src==='bad.mp3'?Promise.reject(new Error('no')):Promise.resolve();}pause(){this.paused=true;}};
+  try{
+    const engine=new AudioEngine();engine.configure({...defaults,sounds:true,volume:40});
+    const ok=engine.playSample('fart.mp3');assert.equal(created[0].volume,.4);
+    created[0].onended();assert.equal(await ok,true);
+    assert.equal(await engine.playSample('bad.mp3'),false);
+    const cancelled=engine.playSample('flush.mp3');engine.stop();
+    assert.equal(await cancelled,true);assert.equal(created[2].paused,true);assert.equal(engine.samples.size,0);
+    engine.configure({...defaults,sounds:false});assert.equal(await engine.playSample('fart.mp3'),false);assert.equal(created.length,3);
+  }finally{delete globalThis.Audio;}
+});
+test('game effects prefer recorded samples and fall back to synthesis when a file fails',async()=>{
+  const created=[];
+  globalThis.Audio=class{constructor(src){this.src=src;created.push(this);}play(){if(this.src==='bad.mp3')return Promise.reject(new Error('no'));setTimeout(()=>this.onended?.(),0);return Promise.resolve();}pause(){}};
+  try{
+    const {e,nodes}=harness();const count=nodes.length;
+    e.setSamples({fart:'fart.mp3',plop:'bad.mp3'});
+    await e.play('fart');assert.equal(created.at(-1).src,'fart.mp3');assert.equal(nodes.length,count);
+    const fallback=e.play('plop');await new Promise(r=>setTimeout(r,0));
+    assert.equal(created.at(-1).src,'bad.mp3');assert.ok(nodes.length>count);e.stop();await fallback;
+    const synth=e.play('flush');assert.equal(created.length,2);e.stop();await synth;
+  }finally{delete globalThis.Audio;}
+});

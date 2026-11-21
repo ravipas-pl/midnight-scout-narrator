@@ -24,7 +24,7 @@
   <div class="app-shell">
     <header class="site-header">
       <a class="brand" href="#" aria-label="The Midnight Scout home"><span class="brand-patch"><svg><use href="#icon-tent"/></svg><span>✦</span></span><span><strong>THE MIDNIGHT SCOUT</strong><small>NIGHT NARRATOR / ผู้ดำเนินคดียามค่ำ</small></span></a>
-      <button class="icon-button" id="settings-button" aria-label="ตั้งค่า / Settings"><svg><use href="#icon-settings"/></svg></button>
+      <div class="header-actions"><button class="icon-button" id="soundboard-button" aria-label="ซาวด์บอร์ด / Soundboard"><svg><use href="#icon-sound"/></svg></button><button class="icon-button" id="settings-button" aria-label="ตั้งค่า / Settings"><svg><use href="#icon-settings"/></svg></button></div>
     </header>
 
     <main>
@@ -71,6 +71,29 @@
       <label><span data-i18n="theme">เสียงประจำค่าย</span><select name="theme"><option value="camp" data-i18n="campSound">Camp bells · ระฆังค่าย</option><option value="soft" data-i18n="softSound">Soft moon · เสียงนุ่ม</option></select></label>
       <div class="toggle-row"><label><input name="speech" type="checkbox"><span data-i18n="speechOn">เสียงพูด</span></label><label><input name="sounds" type="checkbox" checked><span data-i18n="soundsOn">ดนตรีและสัญญาณ</span></label></div>
     </div><p class="settings-note" data-i18n="settingsNote">ค่าเริ่มต้นเป็นโหมดไม่พูด ตื่น 12 / หลับตา 3 วินาที นับเวลาหลังสัญญาณจบ เสียงติ๊กจะเร่งใน 3 วินาทีสุดท้าย</p><button class="primary-button" type="submit" data-i18n="save">บันทึกการตั้งค่า</button></form></dialog>
+  <dialog id="soundboard-dialog" class="soundboard-dialog" aria-labelledby="soundboard-heading"><div class="dialog-header"><div><span class="small-label">CAMP SOUNDBOARD</span><h2 id="soundboard-heading" data-i18n="soundboard">ซาวด์บอร์ดประจำค่าย</h2></div><button type="button" class="icon-button close-button" id="close-soundboard" aria-label="Close soundboard">×</button></div>
+    <p class="soundboard-intro" data-i18n="soundboardIntro">แตะเพื่อเล่นเสียงทีละเสียง ใช้ระดับเสียงและโทนจากการตั้งค่า</p>
+    <h3 class="soundboard-group small-label" data-i18n="sbComedy">เสียงขำขัน</h3>
+    <div class="sound-grid" id="sound-grid-comedy">
+      <button type="button" class="sound-pad sound-pad-comedy" data-sound="fart"><span class="pad-emoji" aria-hidden="true">💨</span><span data-i18n="sbFart">ตด</span></button>
+      <button type="button" class="sound-pad sound-pad-comedy" data-sound="plop"><span class="pad-emoji" aria-hidden="true">💧</span><span data-i18n="sbPlop">น้ำกระเด็น</span></button>
+      <button type="button" class="sound-pad sound-pad-comedy" data-sound="flush"><span class="pad-emoji" aria-hidden="true">🚽</span><span data-i18n="sbFlush">กดชักโครก</span></button>
+    </div>
+    <h3 class="soundboard-group small-label" data-i18n="sbHours">ระฆังบอกเวลา</h3>
+    <div class="sound-grid sound-grid-hours">
+      <button type="button" class="sound-pad" data-sound="awake" data-hour="1"><strong>1</strong></button><button type="button" class="sound-pad" data-sound="awake" data-hour="2"><strong>2</strong></button><button type="button" class="sound-pad" data-sound="awake" data-hour="3"><strong>3</strong></button><button type="button" class="sound-pad" data-sound="awake" data-hour="4"><strong>4</strong></button><button type="button" class="sound-pad" data-sound="awake" data-hour="5"><strong>5</strong></button><button type="button" class="sound-pad" data-sound="awake" data-hour="6"><strong>6</strong></button>
+    </div>
+    <h3 class="soundboard-group small-label" data-i18n="sbCues">สัญญาณเกม</h3>
+    <div class="sound-grid">
+      <button type="button" class="sound-pad" data-sound="prepare"><span class="pad-emoji" aria-hidden="true">🏕️</span><span data-i18n="sbPrepare">เตรียมตัว</span></button>
+      <button type="button" class="sound-pad" data-sound="close"><span class="pad-emoji" aria-hidden="true">🌙</span><span data-i18n="sbClose">หลับตา</span></button>
+      <button type="button" class="sound-pad" data-sound="tick"><span class="pad-emoji" aria-hidden="true">⏱️</span><span data-i18n="sbTick">ติ๊กเร่ง 3 วิ</span></button>
+      <button type="button" class="sound-pad" data-sound="morning"><span class="pad-emoji" aria-hidden="true">☀️</span><span data-i18n="sbMorning">รุ่งเช้า</span></button>
+      <button type="button" class="sound-pad" data-sound="discussion"><span class="pad-emoji" aria-hidden="true">🔎</span><span data-i18n="sbDiscussion">เริ่มสอบสวน</span></button>
+      <button type="button" class="sound-pad" data-sound="vote"><span class="pad-emoji" aria-hidden="true">👉</span><span data-i18n="sbVote">ลงคะแนน</span></button>
+    </div>
+    <button type="button" class="stop-button soundboard-stop" id="soundboard-stop"><span>■</span><span data-i18n="sbStop">หยุดเสียงทั้งหมด</span></button>
+  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
   <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
   <noscript><p class="noscript">Please enable JavaScript to use the night narrator.</p></noscript>

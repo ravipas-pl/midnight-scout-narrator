@@ -4,12 +4,14 @@
   const $ = id => document.getElementById(id);
   const messages = {
     th: {
+      soundboard:'ซาวด์บอร์ดประจำค่าย',soundboardIntro:'แตะเพื่อเล่นเสียงทีละเสียง ใช้ระดับเสียงและโทนจากการตั้งค่า',sbComedy:'เสียงขำขัน',sbHours:'ระฆังบอกเวลา',sbCues:'สัญญาณเกม',sbFart:'ตด',sbPlop:'น้ำกระเด็น',sbFlush:'กดชักโครก',sbPrepare:'เตรียมตัว',sbClose:'หลับตา',sbTick:'ติ๊กเร่ง 3 วิ',sbMorning:'รุ่งเช้า',sbDiscussion:'เริ่มสอบสวน',sbVote:'ลงคะแนน',sbStop:'หยุดเสียงทั้งหมด',sbSoundsOff:'เปิด “ดนตรีและสัญญาณ” ในตั้งค่าก่อนใช้ซาวด์บอร์ด',sbHour:'ระฆังเวลา {hour}',
       chapter:'คดีปริศนาส้วมกลางดึก',nightWatch:'NIGHT WATCH · CLASSIC',fieldNotes:'สมุดประจำค่าย',beforeStart:'ก่อนปิดไฟ',
       checkRoles:'แจกบทบาทลับแล้ว',checkRolesBody:'ผู้ก่อเหตุ 1 คน ที่เหลือผู้บริสุทธิ์',checkDice:'จำแต้ม แล้วครอบถ้วย',checkDiceBody:'แต้มของแต่ละคนคือเวลาที่ต้องตื่น',checkToilet:'หงายส้วมด้านสะอาด',checkToiletBody:'วางกลางวง ให้ทุกคนเอื้อมถึง',wakeWindow:'ช่วงตื่น',eyesClosed:'ช่วงหลับตา',testAudio:'ลองเสียงประจำค่ายทั้งหมด',privacy:'ไม่มีการกรอกหรือเก็บแต้มลับของผู้เล่น หน้าจอแสดงเฉพาะเวลาที่กำลังเรียก',lightsOut:'หลับตา',sunrise:'เช้าแล้ว',stop:'จบรอบ',foregroundHint:'วางโทรศัพท์ไว้กลางวง และเปิดหน้านี้ค้างไว้',footer:'ไม่ว่าใครก็เป็นผู้ต้องสงสัย…',settings:'ตั้งค่าคืนนี้',language:'ภาษา',voice:'เสียงบรรยาย',offlineVoice:'เลือกเสียงที่ติดตั้งบนเครื่องเพื่อใช้งานออฟไลน์ เสียงบางตัวอาจต้องต่ออินเทอร์เน็ต',volume:'ระดับเสียง',speed:'ความเร็วเสียงพูด',wakeSeconds:'ตื่น / วินาที',gapSeconds:'หลับตา / วินาที',prepareSeconds:'เตรียมตัว / วินาที',discussionSeconds:'สอบสวน / วินาที',theme:'เสียงประจำค่าย',campSound:'Camp bells · ระฆังค่าย',softSound:'Soft moon · เสียงนุ่ม',speechOn:'เสียงพูด',soundsOn:'ดนตรีและสัญญาณ',settingsNote:'ค่าเริ่มต้นเป็นโหมดไม่พูด ตื่น 12 / หลับตา 3 วินาที นับเวลาหลังสัญญาณจบ เสียงติ๊กจะเร่งใน 3 วินาทีสุดท้าย',save:'บันทึกการตั้งค่า',
       ready:'พร้อมเข้าค่าย',running:'กำลังดำเนินคดี',discussionRunning:'กำลังสอบสวน',pauseDiscussion:'พักการสอบสวน',discussionPausedDescription:'นาฬิกาหยุดแล้ว ดำเนินต่อเมื่อทุกคนพร้อม',discussionPausedToast:'พักเวลาสอบสวนแล้ว',discussionPauseSpoken:'พักการสอบสวนชั่วคราว',clockUnit:'นาที : วินาที',paused:'พักไว้ก่อน',completed:'จบช่วงนี้แล้ว',start:'เริ่มกลางคืน',pause:'พักชั่วคราว',resume:'ดำเนินต่อ',discuss:'เริ่มสอบสวน',newNight:'เริ่มคืนใหม่',seconds:'วินาที',windows:'ช่วงเวลาตื่น',narrating:'กำลังบรรยาย',readyEyebrow:'รอเริ่มคดี',readyTitle:'คืนนี้…ใครยังไม่นอน?',readyDescription:'เตรียมลูกเต๋า ครอบถ้วย แล้วให้เราพาทั้งค่ายผ่านค่ำคืนนี้',readyCaption:'6 ช่วงเวลา · ทุกคนเล่นได้ ไม่ต้องมีคนอ่านบท',activeCaption:'เวลาสาธารณะเท่านั้น · ไม่เก็บข้อมูลของผู้เล่น',pauseCaption:'เวลาหยุดแล้ว · สัญญาณจะเล่นซ้ำเมื่อดำเนินต่อ',pauseDescription:'ทุกคนหลับตาไว้ก่อน กดดำเนินต่อเมื่อทั้งวงพร้อม',prepareTitle:'ทุกคนหลับตา',prepareDescription:'จำแต้มของตัวเอง แล้วรอช่วงเวลาที่ตรงกัน',awakeTitle:'คนที่ได้แต้ม {hour} ลืมตา',awakeDescription:'สังเกตคนที่ตื่นพร้อมกัน ผู้ก่อเหตุทำภารกิจในช่วงของตนเอง',closeTitle:'ทุกคนหลับตา',closeDescription:'กลับไปพัก…ก่อนเรียกช่วงเวลาถัดไป',lastCloseDescription:'อีกนิดเดียว แสงเช้ากำลังมา',morningTitle:'เช้าแล้ว! ใครไม่กดน้ำ?',morningDescription:'ทุกคนลืมตา เตรียมคำให้การ เริ่มเวลาสอบสวนเมื่อทั้งวงพร้อม',discussionTitle:'ถึงเวลาสอบสวน',discussionDescription:'ใครตื่นตอนไหน? ใครเห็นอะไร? คุยกันได้ แต่ยังไม่เปิดไพ่หรือโชว์แต้ม',voteTitle:'3…2…1…ชี้!',voteDescription:'ลงคะแนนพร้อมกัน โหวตเสมอให้อภิปรายเพิ่ม 30 วินาทีแล้วโหวตรอบตัดสิน',hour:'เวลา {hour}',closed:'หลับตาไว้',morning:'รุ่งเช้า',discussion:'สอบสวน',vote:'ลงคะแนน',
       speechMuted:'โหมดสัญญาณเสียง · ไม่พูด',soundOnly:'นับระฆังสูงให้จบ = เวลาตื่น · 2 เสียงต่ำ = หลับตา · ติ๊กเร็วขึ้นใน 3 วินาทีสุดท้าย · เสียงขำขันสุ่มหลังแต่ละชั่วโมง ไม่ใช่เบาะแส',textOnly:'โหมดข้อความ',textOnlyDetail:'ปิดทั้งเสียงพูดและสัญญาณอยู่ ติดตามเวลาจากหน้าจอ',cueSound:'สัญญาณประจำค่าย',voiceReady:'พร้อมใช้เสียงบรรยาย',voiceLocal:'เสียงติดตั้งบนอุปกรณ์ · ใช้ออฟไลน์ได้',voiceRemote:'เสียงนี้อาจต้องต่ออินเทอร์เน็ต',voiceMissing:'ยังไม่พบเสียงสำหรับภาษานี้',voiceMissingDetail:'ลองทดสอบเสียง หรือเลือกเสียงอื่นในตั้งค่า',speechUnavailable:'อุปกรณ์นี้ไม่รองรับเสียงพูด',speechFallback:'ใช้ข้อความและสัญญาณเสียงแทนได้',systemVoice:'เลือกเสียงอัตโนมัติ',localVoice:'ในเครื่อง',onlineVoice:'อาจใช้อินเทอร์เน็ต',testText:'พร้อมเข้าค่ายแล้ว คืนนี้ทุกคนอาจเป็นผู้ต้องสงสัย',allMuted:'เปิดเสียงพูดหรือสัญญาณเสียงในตั้งค่าก่อนทดสอบ',testDone:'ทดสอบแล้ว พร้อมเริ่มคดี',speechError:'เสียงบรรยายไม่พร้อม ระบบใช้ข้อความและนาฬิกาต่อได้',audioError:'เปิดเสียงสังเคราะห์ไม่ได้ ใช้เสียงพูดหรือข้อความแทน',saved:'บันทึกการตั้งค่าแล้ว',notSaved:'ใช้การตั้งค่านี้ได้ แต่เบราว์เซอร์ไม่อนุญาตให้บันทึกไว้',hiddenPause:'พักรอบแล้ว เพราะออกจากหน้าเกม กลับมากดดำเนินต่อเมื่อพร้อม',pauseSpoken:'พักเกมชั่วคราว ทุกคนหลับตาไว้ก่อน',pausedToast:'พักเวลาแล้ว ทุกคนหลับตาไว้ก่อน',stopped:'จบรอบแล้ว อย่าลืมหงายส้วมด้านสะอาดก่อนรอบใหม่'
     },
     en: {
+      soundboard:'Camp soundboard',soundboardIntro:'Tap to play any sound on its own. Uses the volume and tone from settings.',sbComedy:'COMIC EFFECTS',sbHours:'HOUR BELLS',sbCues:'GAME CUES',sbFart:'Fart',sbPlop:'Water plop',sbFlush:'Flush',sbPrepare:'Get ready',sbClose:'Eyes closed',sbTick:'3-sec ticks',sbMorning:'Morning',sbDiscussion:'Discussion',sbVote:'Vote',sbStop:'Stop all sounds',sbSoundsOff:'Turn on “Music & chimes” in settings to use the soundboard.',sbHour:'Hour {hour} bells',
       chapter:'THE CASE OF THE MIDNIGHT TOILET',nightWatch:'NIGHT WATCH · CLASSIC',fieldNotes:'CAMP FIELD NOTES',beforeStart:'Before lights out',
       checkRoles:'Secret roles dealt',checkRolesBody:'One culprit. Everyone else is innocent.',checkDice:'Remember your roll. Cover it.',checkDiceBody:'Your die determines when you wake.',checkToilet:'Start with a clean toilet',checkToiletBody:'Place the flip token within everyone’s reach.',wakeWindow:'Wake window',eyesClosed:'Eyes-closed gap',testAudio:'Preview all camp sounds',privacy:'No secret dice numbers are entered or stored. Only the current public hour is displayed.',lightsOut:'LIGHTS OUT',sunrise:'SUNRISE',stop:'End round',foregroundHint:'Keep this page open and place the phone in the middle.',footer:'Everyone is a suspect after midnight.',settings:'Set up tonight',language:'Language',voice:'Narrator voice',offlineVoice:'Choose an on-device voice for offline speech. Some voices require an internet connection.',volume:'Volume',speed:'Speech speed',wakeSeconds:'Awake / seconds',gapSeconds:'Eyes closed / seconds',prepareSeconds:'Get ready / seconds',discussionSeconds:'Discussion / seconds',theme:'Camp sound',campSound:'Camp bells',softSound:'Soft moon',speechOn:'Voice narration',soundsOn:'Music & chimes',settingsNote:'Non-verbal by default: 12 seconds awake / 3 seconds eyes closed. Timers start after the cue; ticking accelerates in the last 3 seconds.',save:'Save settings',
       ready:'Camp is ready',running:'Night in progress',discussionRunning:'Discussion in progress',pauseDiscussion:'Pause discussion',discussionPausedDescription:'The timer is stopped. Continue when everyone is ready.',discussionPausedToast:'Discussion timer paused.',discussionPauseSpoken:'The discussion is paused.',clockUnit:'MIN : SEC',paused:'Round paused',completed:'Phase complete',start:'Start the night',pause:'Pause the night',resume:'Continue',discuss:'Start discussion',newNight:'Start a new night',seconds:'seconds',windows:'wake windows',narrating:'NARRATING',readyEyebrow:'WAITING FOR LIGHTS OUT',readyTitle:'Who’s still awake tonight?',readyDescription:'Remember your die, cover your cup, and let the camp settle into the night.',readyCaption:'6 wake windows · Everyone can play',activeCaption:'Public hours only · No player data',pauseCaption:'Timer paused · The cue repeats when you continue',pauseDescription:'Keep your eyes closed. Continue when the whole camp is ready.',prepareTitle:'Everyone, close your eyes',prepareDescription:'Remember your roll. Wait for the matching hour.',awakeTitle:'If you rolled {hour}, wake up',awakeDescription:'Notice who is awake. The culprit acts during their own wake window.',closeTitle:'Everyone, close your eyes',closeDescription:'Settle back down before the next hour.',lastCloseDescription:'Just a moment longer. Morning is on its way.',morningTitle:'Morning! Who forgot to flush?',morningDescription:'Everyone opens their eyes. Start the discussion when the camp is ready.',discussionTitle:'Time to investigate',discussionDescription:'Who woke when? What did they see? Talk, but keep roles and dice hidden.',voteTitle:'3…2…1…point!',voteDescription:'Vote simultaneously. A tie gets 30 seconds of discussion, then one runoff.',hour:'HOUR {hour}',closed:'EYES CLOSED',morning:'MORNING',discussion:'DISCUSSION',vote:'VOTE',
@@ -24,6 +26,8 @@
   let speech;
   let cueGeneration = 0, toastTimer, wakeLock = null, testing = false, starting = false, lastRender = '', lastAnnouncement = '', countdownKey = null;
   let hourEffects=N.randomHourEffects();
+  // Recorded comic effects, used in game, preview and soundboard. The build inlines these as data: URLs.
+  audio.setSamples({ fart:'sounds/fart.mp3', plop:'sounds/plop.mp3', flush:'sounds/flush.mp3' });
   const form = $('settings-form');
   const t = (key, vars = {}) => Object.entries(vars).reduce((s, [k, v]) => s.replaceAll('{' + k + '}', v), (messages[settings.language] || messages.th)[key] || key);
   const say = (phase) => {
@@ -111,7 +115,7 @@
     if (snapshot.status === 'completed') { main = snapshot.mode === 'night' ? 'discuss' : 'newNight'; icon = snapshot.mode === 'night' ? '◷' : '↻'; }
     $('main-label').textContent = t(main); $('main-icon').textContent = icon; $('main-button').disabled = testing || starting;
     $('stop-button').disabled = snapshot.status === 'idle' || starting;
-    $('test-button').disabled = active || testing || starting; $('settings-button').disabled = active || testing || starting;
+    $('test-button').disabled = active || testing || starting; $('settings-button').disabled = active || testing || starting; $('soundboard-button').disabled = active || testing || starting;
     $('control-caption').textContent = t(snapshot.status === 'paused' ? 'pauseCaption' : active ? 'activeCaption' : 'readyCaption');
     document.querySelectorAll('#hour-track li').forEach(li => {
       const hour = +li.dataset.hour, p = snapshot.phase;
@@ -128,6 +132,9 @@
     $('gap-summary').textContent = `${settings.gapSeconds} ${t('seconds')}`;
     $('settings-button').setAttribute('aria-label',t('settings'));
     $('close-settings').setAttribute('aria-label',settings.language === 'th' ? 'ปิดการตั้งค่า' : 'Close settings');
+    $('soundboard-button').setAttribute('aria-label',t('soundboard'));
+    $('close-soundboard').setAttribute('aria-label',settings.language === 'th' ? 'ปิดซาวด์บอร์ด' : 'Close soundboard');
+    document.querySelectorAll('.sound-pad[data-hour]').forEach(pad => pad.setAttribute('aria-label',t('sbHour',{hour:pad.dataset.hour})));
     populateVoices(); updateVoiceStatus(); lastRender = ''; render();
   }
   function readForm() {
@@ -192,10 +199,36 @@
       if (token === cueGeneration) toast(t(['error','timeout','unavailable'].includes(result.status) ? 'speechError' : 'testDone'));
     } finally { testing = false; render(); }
   });
+  // Soundboard: free play of individual sounds, only while no round is active.
+  let padToken = 0;
+  function stopSoundboard() { ++padToken; audio.stop(); document.querySelectorAll('.sound-pad.playing').forEach(p => p.classList.remove('playing')); }
+  $('soundboard-button').addEventListener('click',() => {
+    if (testing || starting || ['running','paused'].includes(engine.status)) return;
+    $('soundboard-dialog').showModal();
+  });
+  $('close-soundboard').addEventListener('click',() => $('soundboard-dialog').close());
+  $('soundboard-dialog').addEventListener('close',stopSoundboard);
+  $('soundboard-stop').addEventListener('click',stopSoundboard);
+  $('soundboard-dialog').addEventListener('click',async event => {
+    const pad = event.target.closest('.sound-pad');
+    if (!pad || ['running','paused'].includes(engine.status)) return;
+    if (!settings.sounds) { toast(t('sbSoundsOff')); return; }
+    stopSoundboard(); const token = padToken;
+    await unlock(); if (token !== padToken) return;
+    pad.classList.add('playing');
+    try {
+      const kind = pad.dataset.sound;
+      // Hour bells always use the counted-bell pattern, regardless of the speech setting.
+      if (kind === 'awake') await audio.play('awake',{hour:+pad.dataset.hour,counted:true});
+      else if (kind === 'tick') await audio.startCountdown(3000,{urgentOnly:true});
+      else await audio.play(kind);
+    } finally { if (token === padToken) pad.classList.remove('playing'); }
+  });
   document.addEventListener('visibilitychange',() => {
     if (document.hidden) {
       if (engine.status === 'running') { pauseRound('hiddenPause'); }
       if (testing) interrupt();
+      if ($('soundboard-dialog').open) stopSoundboard();
       void releaseWakeLock();
     }
   });

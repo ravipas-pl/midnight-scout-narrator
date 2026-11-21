@@ -24,8 +24,8 @@
     }
     return beats.sort((a,b) => a.at - b.at);
   }
-  function cuePattern(kind, settings, { hour = 1 } = {}) {
-    if (kind === 'awake' && !settings.speech) {
+  function cuePattern(kind, settings, { hour = 1, counted = false } = {}) {
+    if (kind === 'awake' && (!settings.speech || counted)) {
       return Array.from({length:Math.max(1,Math.min(6,Math.round(hour)))},(_,i)=>[659.25,i*.32,.18]);
     }
     return ({
@@ -39,7 +39,9 @@
     })[kind] || [[523.25,0,.17],[659.25,.2,.24]];
   }
   class AudioEngine {
-    constructor() { this.context = null; this.master = null; this.nodes = new Set(); this.pending = new Set(); this.settings = {}; this.countdownNodes = new Set(); this.countdownWaiter = null; }
+    constructor() { this.context = null; this.master = null; this.nodes = new Set(); this.pending = new Set(); this.settings = {}; this.countdownNodes = new Set(); this.countdownWaiter = null; this.samples = new Set(); this.sampleUrls = {}; }
+    // Recorded files for the comic effects; any effect without a playable file is synthesized.
+    setSamples(urls) { this.sampleUrls = { ...(urls || {}) }; }
     configure(settings) {
       this.settings = settings;
       if (this.master && this.context) this.master.gain.setValueAtTime(settings.volume / 100 * 0.24, this.context.currentTime);
@@ -61,9 +63,11 @@
     }
     play(kind, phase = {}) {
       if (!this.settings.sounds || !this.context || this.context.state !== 'running') return Promise.resolve();
-      if(kind==='flush')return this.playFlush();
-      if(kind==='fart')return this.playFart();
-      if(kind==='plop')return this.playPlop();
+      if(HOURLY_EFFECTS.includes(kind)){
+        const url=this.sampleUrls[kind];
+        if(url&&root.Audio)return this.playSample(url).then(ok=>ok?undefined:this.playEffect(kind));
+        return this.playEffect(kind);
+      }
       const notes = cuePattern(kind, this.settings, phase);
       const start = this.context.currentTime + .025;
       notes.forEach(([frequency, offset, duration]) => {
@@ -82,6 +86,11 @@
         const item = { resolve, timer: setTimeout(() => { this.pending.delete(item); resolve(); }, length * 1000) };
         this.pending.add(item);
       });
+    }
+    playEffect(kind){
+      if(kind==='flush')return this.playFlush();
+      if(kind==='fart')return this.playFart();
+      return this.playPlop();
     }
     playFlush() {
       if(!this.settings.sounds||!this.context||this.context.state!=='running')return Promise.resolve();
@@ -120,6 +129,27 @@
       return new Promise(resolve=>{
         const item={resolve,timer:setTimeout(()=>{this.pending.delete(item);resolve();},(duration+.08)*1000)};
         this.pending.add(item);
+      });
+    }
+    // Plays a recorded file through an <audio> element (works from file:// and data: URLs,
+    // unlike fetch + decodeAudioData). Resolves true when it finished, false if it could not play.
+    playSample(url){
+      const Player=root.Audio;
+      if(!this.settings.sounds||!url||!Player)return Promise.resolve(false);
+      const player=new Player(url);
+      player.volume=Math.max(0,Math.min(1,(Number(this.settings.volume)||0)/100));
+      return new Promise(resolve=>{
+        const item={player,done:false,finish:ok=>{
+          if(item.done)return;item.done=true;clearTimeout(item.timer);this.samples.delete(item);
+          player.onended=player.onerror=null;resolve(ok);
+        }};
+        item.timer=setTimeout(()=>item.finish(true),15000);
+        player.onended=()=>item.finish(true);
+        player.onerror=()=>item.finish(false);
+        this.samples.add(item);
+        let started;
+        try{started=player.play();}catch(_){item.finish(false);return;}
+        if(started&&typeof started.catch==='function')started.catch(()=>item.finish(false));
       });
     }
     waitForSound(milliseconds){
@@ -203,6 +233,7 @@
     }
     stop() {
       this.stopCountdown();
+      for (const item of [...this.samples]) { try { item.player.pause(); } catch (_) {} item.finish(true); }
       for (const node of this.nodes) { try { node.stop(); } catch (_) {} }
       this.nodes.clear();
       for (const item of this.pending) { clearTimeout(item.timer); item.resolve(); }

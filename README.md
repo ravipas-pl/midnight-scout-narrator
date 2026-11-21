@@ -57,6 +57,7 @@ js/game-engine.js      Independent phase state machine and timestamp clock
 js/audio-engine.js     Independent synthesized audio engine
 js/speech-engine.js    Independent speech queue, cancellation and voice selection
 js/settings.js         Validated local preferences with safe storage fallback
+sounds/                Recorded soundboard effects (inlined by the build)
 scripts/build.mjs     Produces the self-contained dist/index.html
 tests/                 Node built-in tests; no packages required
 ```
@@ -100,3 +101,14 @@ The preview button plays all three comic effects. Every effect is synthesized
 locally, follows the sound toggle and volume, and cancels on pause/stop or
 backgrounding. All 29 automated tests pass, and the complete preview played
 successfully in the browser.
+
+## Soundboard
+
+The speaker button in the header opens a soundboard, where any camp sound can be played on its own: the three comic effects (fart, water plop, flush), the counted bells for hours 1–6, and the game cues (get ready, eyes closed, 3-second accelerating ticks, morning, discussion, vote). Tapping a pad stops whatever is still playing. **Stop all sounds**, closing the dialog, or leaving the page cancels audio. The soundboard uses the volume and camp-sound tone from settings and needs **Music & chimes** turned on. It is disabled while a round is running or paused, so it cannot overlap game cues.
+
+## Recorded comic effects
+
+The fart, water-plop and flush effects play recorded MP3s from `sounds/` (`fart.mp3`, `plop.mp3`, `flush.mp3`) everywhere they appear: the random effect after each hour, the sound preview, and the soundboard. They play at the settings volume. Pause, stop and leaving the page cancel them, just like the synthesized sounds. If a file cannot be played, the synthesized effect is used instead. The eyes-closed timer still starts after the effect finishes, so a recording's length (about 0.3 s, 2.3 s and 2.1 s) sets how long that pause is.
+
+`npm run build` embeds the MP3s as `data:` URLs, so `dist/index.html` remains a single offline file with no external assets.
+
